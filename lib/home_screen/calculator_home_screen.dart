@@ -89,14 +89,9 @@ class _TipCalculatorAppState extends State<TipCalculatorScreen> {
                     style: BorderStyle.none,
                   ),
                 ),
-                hintText: "Bill Amount",
-                hintStyle: TextStyle(
-                  color: Colors.blueGrey,
-                ),
                 filled: true,
                 fillColor: Colors.white,
               ),
-              keyboardType: TextInputType.number,
             ),
           ),
           SizedBox(
@@ -112,10 +107,6 @@ class _TipCalculatorAppState extends State<TipCalculatorScreen> {
                     width: 0,
                     style: BorderStyle.none,
                   ),
-                ),
-                hintText: "Bill Tip (%)",
-                hintStyle: TextStyle(
-                  color: Colors.blueGrey,
                 ),
                 filled: true,
                 fillColor: Colors.white,
@@ -213,12 +204,7 @@ class _TipCalculatorAppState extends State<TipCalculatorScreen> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
         elevation: 10.0,
         padding: EdgeInsets.all(10.0),
-        onPressed: () {
-          if (_formKey.currentState.validate()) {
-            _calculateTip();
-            people = 1;
-          }
-        },
+        onPressed: () {},
         child: Center(
           child: Text(
             "Calculate",
@@ -246,7 +232,7 @@ class _TipCalculatorAppState extends State<TipCalculatorScreen> {
                       style: TextStyle(color: Colors.white, fontSize: 18),
                     ),
                     Text(
-                      tipPerPerson.toString(),
+                      "0",
                       maxLines: 1,
                       style: TextStyle(
                           fontSize: 25.0,
@@ -271,7 +257,7 @@ class _TipCalculatorAppState extends State<TipCalculatorScreen> {
                       style: TextStyle(color: Colors.white, fontSize: 18),
                     ),
                     Text(
-                      tipTotalPerPerson.toString(),
+                      "0",
                       maxLines: 1,
                       style: TextStyle(
                           fontSize: 25.0,
@@ -288,13 +274,5 @@ class _TipCalculatorAppState extends State<TipCalculatorScreen> {
     );
   }
 
-  void _calculateTip() {
-    FocusScope.of(context).requestFocus(FocusNode());
-
-    if (people > 1) {
-      isCalculatePressed = true;
-    } else {
-      isCalculatePressed = false;
-    }
-  }
+  void _calculateTip() {}
 }
