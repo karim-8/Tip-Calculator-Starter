@@ -16,6 +16,7 @@ class _TipCalculatorAppState extends State<TipCalculatorScreen> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController billTextEditingController = TextEditingController();
   TextEditingController tipTextEditingController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,9 +90,20 @@ class _TipCalculatorAppState extends State<TipCalculatorScreen> {
                     style: BorderStyle.none,
                   ),
                 ),
+                hintText: "Bill Amount",
+                hintStyle: TextStyle(
+                  color: Colors.blueGrey,
+                ),
                 filled: true,
                 fillColor: Colors.white,
               ),
+              keyboardType: TextInputType.number,
+              // ignore: missing_return
+              validator: (String billAmount) {
+                if (billAmount.isEmpty) {
+                  return "Required";
+                }
+              },
             ),
           ),
           SizedBox(
@@ -108,10 +120,20 @@ class _TipCalculatorAppState extends State<TipCalculatorScreen> {
                     style: BorderStyle.none,
                   ),
                 ),
+                hintText: "Bill Tip (%)",
+                hintStyle: TextStyle(
+                  color: Colors.blueGrey,
+                ),
                 filled: true,
                 fillColor: Colors.white,
               ),
               keyboardType: TextInputType.number,
+              // ignore: missing_return
+              validator: (String billTip) {
+                if (billTip.isEmpty) {
+                  return "Required";
+                }
+              },
             ),
           ),
         ],
@@ -158,6 +180,14 @@ class _TipCalculatorAppState extends State<TipCalculatorScreen> {
                       Icons.remove,
                       color: Colors.white,
                     ),
+                    onPressed: () {
+                      if (people != 1) {
+                        setState(() {
+                          isCalculatePressed = false;
+                          people--;
+                        });
+                      }
+                    },
                   ),
                 ),
                 SizedBox(width: 10.0),
@@ -185,6 +215,7 @@ class _TipCalculatorAppState extends State<TipCalculatorScreen> {
                       Icons.add,
                       color: Colors.white,
                     ),
+                    onPressed: () {},
                   ),
                 ),
               ],
@@ -224,7 +255,6 @@ class _TipCalculatorAppState extends State<TipCalculatorScreen> {
               margin: EdgeInsets.only(left: 20.0, right: 10.0),
               child: Container(
                 color: Colors.grey,
-                padding: EdgeInsets.all(10.0),
                 child: Column(
                   children: <Widget>[
                     Text(
@@ -232,7 +262,7 @@ class _TipCalculatorAppState extends State<TipCalculatorScreen> {
                       style: TextStyle(color: Colors.white, fontSize: 18),
                     ),
                     Text(
-                      "0",
+                      tipPerPerson.toString(),
                       maxLines: 1,
                       style: TextStyle(
                           fontSize: 25.0,
@@ -249,7 +279,6 @@ class _TipCalculatorAppState extends State<TipCalculatorScreen> {
               margin: EdgeInsets.only(left: 10.0, right: 20.0),
               child: Container(
                 color: Colors.grey,
-                padding: EdgeInsets.all(10.0),
                 child: Column(
                   children: <Widget>[
                     Text(
@@ -257,7 +286,7 @@ class _TipCalculatorAppState extends State<TipCalculatorScreen> {
                       style: TextStyle(color: Colors.white, fontSize: 18),
                     ),
                     Text(
-                      "0",
+                      tipTotalPerPerson.toString(),
                       maxLines: 1,
                       style: TextStyle(
                           fontSize: 25.0,
